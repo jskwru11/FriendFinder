@@ -7,12 +7,12 @@ module.exports = (app) => {
       });
 
       app.get('/survey', function(req, res, next) {
-          console.log(req.body);
+        
         res.sendFile(path.join(__dirname, '../public/survey.html'));
     });
 
     app.post('/survey', function(req, res, next) {
-        console.log(req.body);
+       
         res.send('ok');
 
   });

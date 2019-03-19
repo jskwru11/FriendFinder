@@ -43,7 +43,7 @@
 
 
         <h2>Question 1</h2>
-        <h4>This is my first paragraph</h4>
+        <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
         <select id="q1" class="custom-select custom-select-lg mb-3" style="width: 200px;">
             <option selected>Open this select menu</option>
             <option value="1">1 (Strongly Disagree)</option>
@@ -54,7 +54,7 @@
         </select>
 
         <h2>Question 2</h2>
-        <h4>This is my first paragraph</h4>  
+        <h4>Generally speaking, you rely more on your experience than your imagination.</h4>  
         <select id="q2" class="custom-select custom-select-lg mb-3" style="width: 200px;">
             <option selected>Open this select menu</option>
             <option value="1">1 (Strongly Disagree)</option>
@@ -65,7 +65,7 @@
         </select>
 
         <h2>Question 3</h2>
-        <h4>This is my first paragraph</h4>
+        <h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
         <select id="q3" class="custom-select custom-select-lg mb-3" style="width: 200px;">
             <option selected>Open this select menu</option>
             <option value="1">1 (Strongly Disagree)</option>
@@ -76,7 +76,7 @@
         </select>
 
         <h2>Question 4</h2>
-        <h4>This is my first paragraph</h4>
+        <h4>You rarely do something just out of sheer curiosity.</h4>
         <select id="q4" class="custom-select custom-select-lg mb-3" style="width: 200px;">
             <option selected>Open this select menu</option>
             <option value="1">1 (Strongly Disagree)</option>
@@ -87,7 +87,7 @@
         </select>
 
         <h2>Question 5</h2>
-        <h4>This is my first paragraph</h4>
+        <h4>People can rarely upset you.</h4>
         <select id="q5" class="custom-select custom-select-lg mb-3" style="width: 200px;">
             <option selected>Open this select menu</option>
             <option value="1">1 (Strongly Disagree)</option>
@@ -98,7 +98,7 @@
         </select>
 
         <h2>Question 6</h2>
-        <h4>This is my first paragraph</h4>
+        <h4>It is often difficult for you to relate to other people’s feelings.</h4>
         <select id="q6" class="custom-select custom-select-lg mb-3" style="width: 200px;">
             <option selected>Open this select menu</option>
             <option value="1">1 (Strongly Disagree)</option>
@@ -109,7 +109,7 @@
         </select>
 
         <h2>Question 7</h2>
-        <h4>This is my first paragraph</h4>
+        <h4>In a discussion, truth should be more important than people’s sensitivities.</h4>
         <select id="q7" class="custom-select custom-select-lg mb-3" style="width: 200px;">
             <option selected>Open this select menu</option>
             <option value="1">1 (Strongly Disagree)</option>
@@ -120,7 +120,7 @@
         </select>
 
         <h2>Question 8</h2>
-        <h4>This is my first paragraph</h4>
+        <h4>You rarely get carried away by fantasies and ideas.</h4>
         <select id="q8" class="custom-select custom-select-lg mb-3" style="width: 200px;">
             <option selected>Open this select menu</option>
             <option value="1">1 (Strongly Disagree)</option>
@@ -131,7 +131,7 @@
         </select>
 
         <h2>Question 9</h2>
-        <h4>This is my first paragraph</h4>
+        <h4>You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</h4>
         <select id="q9" class="custom-select custom-select-lg mb-3" style="width: 200px;">
             <option selected>Open this select menu</option>
             <option value="1">1 (Strongly Disagree)</option>
@@ -142,7 +142,7 @@
         </select>
 
         <h2>Question 10</h2>
-        <h4>This is my first paragraph</h4>
+        <h4>You feel more energetic after spending time with a group of people.</h4>
         <select id="q10" class="custom-select custom-select-lg mb-3" style="width: 200px;">
             <option selected>Open this select menu</option>
             <option value="1">1 (Strongly Disagree)</option>
@@ -178,7 +178,7 @@
                 </div>
                 <div class="modal-body">
                     <h2 id="match-name"></h2>
-                    <img id="match-img" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+                    <img id="match-img" src="" alt="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -195,30 +195,49 @@
     $('#surveyForm').on('submit', function(evt) {
         evt.preventDefault();
 
-        var userInfo = {
+
+        const q1 = $('#q1').val();
+        const q2 = $('#q2').val();
+        const q3 = $('#q3').val();
+        const q4 = $('#q4').val();
+        const q5 = $('#q5').val();
+        const q6 = $('#q6').val();
+        const q7 = $('#q7').val();
+        const q8 = $('#q8').val();
+        const q9 = $('#q9').val();
+        const q10 = $('#q10').val();
+
+        if ($('#name').val() && $('#photo').val() && q1 && q2 && q3 && q4 && q5 && q6 && q7 && q8 && q9 && q10) {
+            var userInfo = {
             name: $('#name').val(),
             photo: $('#photo').val(),
-            answers: [
-                $('#q1').val(),
-                $('#q2').val(),
-                $('#q3').val(),
-                $('#q4').val(),
-                $('#q5').val(),
-                $('#q6').val(),
-                $('#q7').val(),
-                $('#q8').val(),
-                $('#q9').val(),
-                $('#q10').val(),
+            scores: [
+                q1,
+                q2,
+                q3,
+                q4,
+                q5,
+                q6,
+                q7,
+                q8,
+                q9,
+                q10,
             ]
         };
         
-        $.post('/api/friends', userInfo, function(data) {
-            console.log(data);
-            $('#match-name').text(data[0].name);
-            $('match-img').attr('src', data[0].photo);
+            $.post('/api/friends', userInfo, function(data) {
+                const name = data.name;
+                const photo = data.photo;
 
-            $('#results-modal').modal('toggle');
-        });
+                $('#match-name').text(name);
+                $('#match-img').attr('src', photo);
+                $('#results-modal').modal('toggle');
+            });
+        } else {
+            alert(`Please complete the entire survey before submitting your results...`);
+        }
+
+        
     });
 </script>
 
